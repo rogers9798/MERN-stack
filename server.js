@@ -34,3 +34,41 @@ var getHash = ( pass , phone ) => {
     console.log("hmac : " + gen_hmac);
     return gen_hmac;
 }
+
+// Sign-up function starts here. . .
+app.post('/sign_up' ,function(req,res){
+	var name = req.body.name;
+	var email= req.body.email;
+	var pass = req.body.password;
+		var phone = req.body.phone;
+	var password = getHash( pass , phone ); 				
+
+	
+	var data = {
+		"name":name,
+		"email":email,
+		"password": password, 
+		"phone" : phone
+	}
+	
+	mongo.connect(new_db , function(error , dbs){
+		if (error){
+			throw error;
+		}
+		console.log("connected to database successfully");
+        const db=dbs.db("sign-up"); 
+        
+		db.collection("details").insertOne(data, (err , collection) => {
+			if(err) throw err;
+			console.log("Record inserted successfully");
+			console.log(collection);
+		});
+	});
+	
+	console.log("DATA is " + JSON.stringify(data) );
+	res.set({
+		'Access-Control-Allow-Origin' : '*'
+	});
+	return res.redirect('/public/success.html');  
+
+});
