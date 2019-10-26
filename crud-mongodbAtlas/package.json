@@ -1,0 +1,16 @@
+{
+  "name": "crud-mongodbatlas",
+  "version": "1.0.0",
+  "description": "practice mongo-atlas-crud",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "rogers9798",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.7"
+  }
+}
